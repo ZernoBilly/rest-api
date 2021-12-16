@@ -10,6 +10,11 @@ dotenv.config();
 const PORT = process.env.PORT;
 const DB_CONNECTION = process.env.DB_CONNECTION as string;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/auth", authRoutes);
+
+//Connect to database and open server listening port
 mongoose
   .connect(DB_CONNECTION)
   .then(() => {
@@ -23,7 +28,3 @@ mongoose
     console.log({ error });
     throw new Error(error);
   });
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use("/auth", authRoutes);

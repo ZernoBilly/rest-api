@@ -4,7 +4,6 @@ import User from "../models/user";
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
-import user from "../models/user";
 
 dotenv.config();
 
@@ -21,6 +20,7 @@ router.post(
     const validationErrors = validationResult(req);
     const { name, email, password } = await req.body;
 
+    //Check validation errors
     if (!validationErrors.isEmpty()) {
       const errors = validationErrors.array().map((error) => {
         return {
@@ -30,10 +30,11 @@ router.post(
       return res.json({ errors, data: null });
     }
 
+    //Find if email already exists
     const user = await User.findOne({ email });
 
     if (user) {
-      res.json({
+      return res.json({
         errors: [
           {
             msg: "Email already in use",
@@ -43,14 +44,17 @@ router.post(
       });
     }
 
+    //Encrypt password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    //Create new user
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
     });
 
+    //Create token
     const token = JWT.sign(
       { name: newUser.name, email: newUser.email },
       JWT_SECRET,
@@ -59,7 +63,8 @@ router.post(
       }
     );
 
-    res.json({
+    //Return values after passing all checks
+    return res.json({
       errors: [],
       data: {
         token,
@@ -77,6 +82,7 @@ router.post(
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
+  //Find if email exist
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -90,6 +96,7 @@ router.post("/login", async (req, res) => {
     });
   }
 
+  //Find if password exist
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
@@ -102,10 +109,12 @@ router.post("/login", async (req, res) => {
     });
   }
 
+  //Create token
   const token = JWT.sign({ name: user.name, email: user.email }, JWT_SECRET, {
     expiresIn: 360000,
   });
 
+  //Return values if passing all checks
   return res.json({
     errors: [],
     data: {
