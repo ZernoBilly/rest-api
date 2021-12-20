@@ -11,7 +11,7 @@ const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
-// User signup route
+//---User signup route---
 router.post(
   "/signup",
   body("email").isEmail().withMessage("Invalid email"),
@@ -78,7 +78,7 @@ router.post(
   }
 );
 
-//User login route
+//---User login route---
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 

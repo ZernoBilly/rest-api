@@ -2,6 +2,7 @@ import express from "express";
 import authRoutes from "./routes/auth";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 
 const app = express();
 
@@ -12,6 +13,7 @@ const DB_CONNECTION = process.env.DB_CONNECTION as string;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use("/auth", authRoutes);
 
 //Connect to database and open server listening port
