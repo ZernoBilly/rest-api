@@ -5,6 +5,8 @@ import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
 
+import { validateAuth } from "../middleware/validateAuth";
+
 dotenv.config();
 
 const router = express.Router();
@@ -106,6 +108,7 @@ router.post("/login", async (req, res) => {
           msg: "Invalid credentials",
         },
       ],
+      data: null,
     });
   }
 
@@ -119,6 +122,21 @@ router.post("/login", async (req, res) => {
     errors: [],
     data: {
       token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    },
+  });
+});
+
+router.get("/me", validateAuth, async (req, res) => {
+  const user = await User.findOne({ email: req.user });
+
+  return res.json({
+    errors: [],
+    data: {
       user: {
         id: user._id,
         name: user.name,
