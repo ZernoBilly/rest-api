@@ -1,8 +1,10 @@
 import express from "express";
 import authRoutes from "./routes/auth";
+import passwordRoutes from "./routes/password";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import createPassword from "./utils/passwordGenerator/passwordGenerator";
 
 const app = express();
 
@@ -15,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/auth", authRoutes);
+app.use("/password", passwordRoutes);
 
 //Connect to database and open server listening port
 mongoose
