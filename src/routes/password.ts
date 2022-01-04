@@ -1,5 +1,4 @@
 import express from "express";
-import { body, validationResult } from "express-validator";
 import Password from "../models/password";
 import User from "../models/user";
 import dotenv from "dotenv";
@@ -58,21 +57,41 @@ router.post("/create", async (req, res) => {
     userID: _id,
   });
 
+  //Decrypt passwords
+  const decryptedPasswords = () =>
+    passwords.map((item) => {
+      const bytes = CryptoJS.AES.decrypt(item.password, CRYPTOJS_SECRET_KEY);
+      const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+      item.password = originalPassword;
+
+      return item;
+    });
+
   return res.json({
     errors: [],
     data: {
-      passwords: passwords,
+      passwords: decryptedPasswords(),
     },
   });
 });
 
 //---Get all passwords for user route---
-router.get("/getall", async (req, res) => {
+router.post("/getall", async (req, res) => {
   const { _id } = req.body;
 
   const passwords = await Password.find({
     userID: _id,
   });
+
+  //Decrypt passwords
+  const decryptedPasswords = () =>
+    passwords.map((item) => {
+      const bytes = CryptoJS.AES.decrypt(item.password, CRYPTOJS_SECRET_KEY);
+      const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+      item.password = originalPassword;
+
+      return item;
+    });
 
   //Check if user has passwords
   if (!passwords.length) {
@@ -91,7 +110,7 @@ router.get("/getall", async (req, res) => {
   return res.json({
     errors: [],
     data: {
-      passwords: passwords,
+      passwords: decryptedPasswords(),
     },
   });
 });
@@ -107,10 +126,20 @@ router.delete("/delete", async (req, res) => {
     userID: userID,
   });
 
+  //Decrypt passwords
+  const decryptedPasswords = () =>
+    passwords.map((item) => {
+      const bytes = CryptoJS.AES.decrypt(item.password, CRYPTOJS_SECRET_KEY);
+      const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+      item.password = originalPassword;
+
+      return item;
+    });
+
   return res.json({
     errors: [],
     data: {
-      passwords: passwords,
+      passwords: decryptedPasswords(),
     },
   });
 });
