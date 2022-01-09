@@ -22,17 +22,19 @@ User validation. Middleware validation. Password is hashed to database and never
 
 #### Request
 
-```
-// Signup route
+##### Signup route
 
+```
 {
     "name": <string>
     "email": <string, min 5 chars>
     "password": <string>
 }
+```
 
-// Signin route
+##### Signin route
 
+```
 {
     "email": <string>,
     "password": <string>
@@ -73,8 +75,9 @@ All routes returns all passwords for user.
 }
 ```
 
-// Create password route
+##### Create password route
 
+```
 {
 "\_id": <string userID>,
 "title": <string>,
@@ -87,9 +90,11 @@ All routes returns all passwords for user.
     "tag": <string>
 
 }
+```
 
-// Delete password route
+##### Delete password route
 
+```
 {
 "\_id": <string passwordID>,
 "userID" : <string userID>
@@ -119,7 +124,5 @@ All routes returns all passwords for user.
     }
 
 }
-
-```
 
 ```
