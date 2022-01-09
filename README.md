@@ -82,13 +82,11 @@ All routes returns all passwords for user.
 "_id": <string userID>,
 "title": <string>,
 "password": {
-"length": <number max 15>,
-"hasNumbers": <boolea>,
-"hasSymbols": <boolean>
-
+    "length": <number max 15>,
+    "hasNumbers": <boolea>,
+    "hasSymbols": <boolean>
     },
-    "tag": <string>
-
+"tag": <string>
 }
 ```
 
