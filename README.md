@@ -109,15 +109,15 @@ All routes returns all passwords for user.
 {
 "errors": [],
 "data": {
-"passwords": [
-        {
-        "_id": <string>,
-        "userID": <string>,
-        "title": <string>,
-        "password": <string>,
-        "tag": <string>,
-        "createdAt": <string Date>,
-        },
+    "passwords": [
+            {
+            "_id": <string>,
+            "userID": <string>,
+            "title": <string>,
+            "password": <string>,
+            "tag": <string>,
+            "createdAt": <string Date>,
+            },
         ]
     }
 }
