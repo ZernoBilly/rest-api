@@ -20,7 +20,7 @@ User validation. Middleware validation. Password is hashed to database and never
 
 ### UserRoute
 
-#### Request
+- #### Request
 
 ##### Signup route
 
@@ -42,7 +42,7 @@ User validation. Middleware validation. Password is hashed to database and never
 
 ```
 
-#### Response
+- #### Response
 
 ```
 {
@@ -65,7 +65,7 @@ Every password has linked user id. Passwords are crypted to database.
 
 All routes returns all passwords for user.
 
-#### Request
+- #### Request
 
 ##### Get all passwords for user route
 
@@ -102,7 +102,7 @@ All routes returns all passwords for user.
 
 ```
 
-#### Response
+- #### Response
 
 ```
 
