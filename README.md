@@ -65,36 +65,35 @@ All routes returns all passwords for user.
 
 #### Request
 
-```
-// Get all passwords for user route
+##### Get all passwords for user route
 
+```
 {
     "_id": <string userID>
 }
-
+```
 
 // Create password route
 
 {
-    "_id": <string userID>,
-    "title": <string>,
-    "password": {
-        "length": <number max 15>,
-        "hasNumbers": <boolea>,
-        "hasSymbols": <boolean>
+"\_id": <string userID>,
+"title": <string>,
+"password": {
+"length": <number max 15>,
+"hasNumbers": <boolea>,
+"hasSymbols": <boolean>
 
     },
     "tag": <string>
+
 }
 
 // Delete password route
 
 {
-    "_id": <string passwordID>,
-    "userID" : <string userID>
+"\_id": <string passwordID>,
+"userID" : <string userID>
 }
-
-
 
 ```
 
@@ -103,21 +102,24 @@ All routes returns all passwords for user.
 ```
 
 {
-    "errors": [],
-    "data": {
-        "passwords": [
-            {
-                "_id": <string>,
-                "userID": <string>,
-                "title": <string>,
-                "password": <string>,
-                "tag": <string>,
-                "createdAt": <string Date>,
+"errors": [],
+"data": {
+"passwords": [
+{
+"\_id": <string>,
+"userID": <string>,
+"title": <string>,
+"password": <string>,
+"tag": <string>,
+"createdAt": <string Date>,
 
             },
 
         ]
     }
+
 }
+
+```
 
 ```
