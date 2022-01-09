@@ -79,7 +79,7 @@ All routes returns all passwords for user.
 
 ```
 {
-"\_id": <string userID>,
+"_id": <string userID>,
 "title": <string>,
 "password": {
 "length": <number max 15>,
@@ -96,7 +96,7 @@ All routes returns all passwords for user.
 
 ```
 {
-"\_id": <string passwordID>,
+"_id": <string passwordID>,
 "userID" : <string userID>
 }
 
@@ -111,7 +111,7 @@ All routes returns all passwords for user.
 "data": {
 "passwords": [
 {
-"\_id": <string>,
+"_id": <string>,
 "userID": <string>,
 "title": <string>,
 "password": <string>,
